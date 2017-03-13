@@ -58,7 +58,7 @@ class FirstData extends AbstractGateway
      *
      * @return array
      */
-    protected function getPurchaseData($paymentDetails)
+    public function getPurchaseData($paymentDetails)
     {
         return [
             'accountId' => $paymentDetails['accountId'],
@@ -77,7 +77,7 @@ class FirstData extends AbstractGateway
      *
      * @return array
      */
-    protected function getRefundData($paymentDetails)
+    public function getRefundData($paymentDetails)
     {
         //This if statement is here for backwards compatibility to the old way that transaction data was stored.
         if(strpos($paymentDetails['transactionId'], '::') !== false) {
@@ -100,7 +100,7 @@ class FirstData extends AbstractGateway
      *
      * @return array
      */
-    protected function getVoidData($paymentDetails)
+    public function getVoidData($paymentDetails)
     {
         return $this->getRefundData($paymentDetails);
     }

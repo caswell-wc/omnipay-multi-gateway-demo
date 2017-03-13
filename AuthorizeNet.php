@@ -28,8 +28,8 @@ class AuthorizeNet extends AbstractGateway
     public function __construct($credentials)
     {
         $this->gateway = Omnipay::create('AuthorizeNet_AIM');
-        $this->gateway->setApiLoginId($credentials->GatewayUsername);
-        $this->gateway->setTransactionKey($credentials->BankNumber);
+        $this->gateway->setApiLoginId($credentials->login);
+        $this->gateway->setTransactionKey($credentials->key);
     }
 
     /**
@@ -76,7 +76,7 @@ class AuthorizeNet extends AbstractGateway
      *
      * @return array
      */
-    protected function getRefundData($paymentDetails)
+    public function getRefundData($paymentDetails)
     {
         $transaction = $paymentDetails['transactions'][$transactionKey];
         $referenceData = [
@@ -102,13 +102,12 @@ class AuthorizeNet extends AbstractGateway
      *
      * @return array
      */
-    protected function getPurchaseData($paymentDetails)
+    public function getPurchaseData($paymentDetails)
     {
-        $transaction = $paymentDetails['transactions'][$transactionKey];
         return [
-            'card'=>$this->generateCardObj($transaction),
-            'currency'=>$transaction['currency'],
-            'amount'=>$transaction['amount']
+            'card'=>$this->generateCardObj($paymentDetails),
+            'currency'=>$paymentDetails['currency'],
+            'amount'=>$paymentDetails['amount']
         ];
     }
 
@@ -120,8 +119,8 @@ class AuthorizeNet extends AbstractGateway
      *
      * @return array
      */
-    protected function getVoidData($paymentDetails)
+    public function getVoidData($paymentDetails)
     {
-        return $this->getRefundData($paymentDetails, $transactionKey);
+        return $this->getRefundData($paymentDetails);
     }
 }

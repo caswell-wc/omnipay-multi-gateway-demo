@@ -14,31 +14,6 @@ abstract class AbstractGateway implements GatewayInterface
     protected $pathToSecurityKeys = '<path to security key files on your server>';
 
     /**
-     * Get the data needed for a purchase
-     *
-     * @param array $paymentDetails The full data from the original json sent to be processed.
-     */
-    protected abstract function getPurchaseData($paymentDetails);
-
-    /**
-     * Get the data needed for a refund
-     *
-     * @param array $paymentDetails The full data from the original json sent to be processed.
-     *
-     * @return mixed
-     */
-    protected abstract function getRefundData($paymentDetails);
-
-    /**
-     * Get the data needed for a void
-     *
-     * @param array $paymentDetails The full data from the original json sent to be processed.
-     *
-     * @return mixed
-     */
-    protected abstract function getVoidData($paymentDetails);
-
-    /**
      * Get the transaction ID from the response. This is the default interaction that most of the gateways will use but
      * it can be overriden in the specific gateway's class such as AuthorizeNet.
      *

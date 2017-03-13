@@ -18,22 +18,31 @@ interface GatewayInterface
 {
 
     /**
-     * Run a purchase transaction.
+     * Get the data for a purchase transaction.
      *
      * @param array $paymentDetails The full data from the original json to be processed.
      *
      * @return \Omnipay\Common\Message\ResponseInterface
      */
-    public function purchase($paymentDetails);
+    public function getPurchaseData($paymentDetails);
 
     /**
-     * Run a refund transaction.
+     * Get the data for a refund transaction.
      *
      * @param array $paymentDetails The full data from the original json to be processed.
      *
      * @return \Omnipay\Common\Message\ResponseInterface
      */
-    public function refund($paymentDetails);
+    public function getRefundData($paymentDetails);
+
+    /**
+     * Get the data for a void transaction
+     *
+     * @param array $paymentDetails The full data from the original json to be processed.
+     *
+     * @return mixed
+     */
+    public function getVoidData($paymentDetails);
 
     /**
      * Get the transaction ID from the response
